@@ -1,0 +1,104 @@
+{% extends 'navbar.html' %}
+{% load crispy_forms_tags %}
+{%block css_block%}
+
+{% endblock%}
+
+{%block body_block%}
+<br><br><br>
+<!-- Sidebar -->
+<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%;padding: 10px;">
+
+    <div>
+        {% if user.user_profile.profile_pic %}
+    <img src="/media/{{user.user_profile.profile_pic}}" width="160px" height="160px" class="rounded-circle">
+    {% else %}
+    <img src="/media/default.jpg" width="160px" height="160px" class="rounded-circle">
+    {% endif %}
+
+        <h1>{{user.username}} &nbsp; <a href="{% url 'Login_App:edit' %}" class="btn btn-light">Edit Profile</a></h1>
+    <h4>{{user.product.count}} Products posts</h4>
+
+    <h3>{{user.user_profile.full_name}}</h3>
+    <p>{{user.user_profile.description|linebreaks}}</p>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  New Post
+</button>
+    </div>
+
+
+    </div>
+
+
+
+<!-- Page Content -->
+<div style="margin-left:30%">
+
+<div class="w3-container">
+    {% for product in user.product.all %}
+            <div class="border rounded " style="background-color: #ffffff;">
+                <div style="margin-left: 10px;">
+                    {% if post.seller.user_profile.profile_pics %}
+                    <img src="/media/{{product.seller.user_profile.profile_pics}}" width="40px" height="40px"
+                         style="margin-top: 15px;" class="rounded-circle">
+                    {% else %}
+                    <img src="/media/default.jpg" width="40px" height="40px" class="rounded-circle">
+                    {% endif %}
+                    <a>&nbsp;{{product.seller.user_profile.full_name}}</a>
+                    <a>&nbsp;&nbsp;<i class="fas fa-clock" style="color:#82B6D9;"></i>&nbsp;{{product.upload_date}}</a>
+                </div>
+                <hr>
+                <div class="post_caption" style="margin-left: 10px; margin-bottom: 10px;">
+                    {{product.descriptions}}
+                </div>
+                <br>
+                <img class="crop mx-auto d-block" src="/media/{{product.image}}">
+                <br>
+            </div>
+            <hr>
+            {% endfor %}
+
+    {% for user in user.full_name.all %}
+     {{user.full_name}}
+
+    {% endfor %}
+
+</div>
+</div>
+
+
+
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Post a Photo</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form method="POST" enctype="multipart/form-data">
+          {{form.as_p}}
+          {% csrf_token %}
+          <button type="submit">Post</button>
+        </form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<br>
+<br>
+
+
+{%endblock%}
