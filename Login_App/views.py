@@ -40,7 +40,7 @@ def login_page(request):
 @login_required
 def edit_profile(request):
     if request.user == True:
-        current_user = UserProfile.objects.get(user=request.user)
+        current_user = UserProfile.objects.getgit(user=request.user)
         form = EditProfile(instance=current_user)
         if request.method == 'POST':
             form = EditProfile(request.POST, request.FILES, instance=current_user)
