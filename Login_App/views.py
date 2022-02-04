@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect
 from Login_App.forms import CreateNewUser, EditProfile
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse, reverse_lazy
-from Login_App.models import UserProfile
+from Login_App.models import AdminProfile,EmployeeProfile,SellerProfile
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 

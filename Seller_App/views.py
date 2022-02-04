@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponseRedirect
+"""from django.shortcuts import render,HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
@@ -24,3 +24,4 @@ def seller(request):
     post = Products.objects.all
 
     return render(request, 'Seller_App/profile.html', context={'title': 'Seller', 'form': form, 'post':post})
+"""
