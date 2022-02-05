@@ -32,19 +32,30 @@
                 </li>
                 {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                    {% if user.user_profile.profile_pic %}
-                    <a class="nav-link" href="{% url 'Seller_App:seller_home' %}"><img
-                            src="/media/{{user.user_profile.profile_pic}}" width="40px" height="40px" class="rounded-circle"></a>
+                    {% if user.admin_profile.profile_pic %}
+                    <a class="nav-link" href="{% url 'Login_App:ad_profile' %}"><img
+                            src="/media/{{user.admin_profile.profile_pic}}" width="40px" height="40px" class="rounded-circle"></a>
+                    {% elif user.seller_profile.profile_pic %}
+                    <a class="nav-link" href="{% url 'Login_App:se_profile' %}"><img src="/media/{{user.seller_profile.profile_pic}}" width="40px" height="40px" class="rounded-circle"></a>
+                    {% elif user.employee_profile.profile_pic %}
+                    <a class="nav-link" href="{% url 'Login_App:em_profile' %}"><img src="/media/{{user.employee_profile.profile_pic}}" width="40px" height="40px" class="rounded-circle"></a>
                     {% else %}
-                    <a class="nav-link" href="{% url 'Seller_App:seller_home' %}"><img src="/media/default.jpg" width="40px" height="40px" class="rounded-circle"></a>
+                    <a class="nav-link" href="#"><img src="/media/default.jpg" width="40px" height="40px" class="rounded-circle"></a>
                     {% endif %}
                 </li>
                 <li>
                     <a class="nav-link " href="{% url 'Login_App:logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
                 </li>
                 {% else %}
-                <li class="nav-item">
-                  <a href="{% url 'Login_App:login' %}" class="btn btn-outline-secondary">Login</a>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Login
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#">Admin Login</a></li>
+                    <li><a class="dropdown-item" href="#">Seller Login</a></li>
+                    <li><a class="dropdown-item" href="#">Employee Login</a></li>
+                  </ul>
                 </li>
                 {% endif %}
             </ul>

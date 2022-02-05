@@ -10,7 +10,7 @@
 <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%;padding: 10px;">
 
     <div>
-        {% if user.user_profile.profile_pic %}
+        {% if user.seller_profile.profile_pic %}
     <img src="/media/{{user.user_profile.profile_pic}}" width="160px" height="160px" class="rounded-circle">
     {% else %}
     <img src="/media/default.jpg" width="160px" height="160px" class="rounded-circle">
@@ -19,8 +19,8 @@
         <h1>{{user.username}} &nbsp; <a href="{% url 'Login_App:edit' %}" class="btn btn-light">Edit Profile</a></h1>
     <h4>{{user.product.count}} Products posts</h4>
 
-    <h3>{{user.user_profile.full_name}}</h3>
-    <p>{{user.user_profile.description|linebreaks}}</p>
+    <h3>{{user.seller_profile.full_name}}</h3>
+    <p>{{user.seller_profile.description|linebreaks}}</p>
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
   New Post
 </button>
@@ -38,13 +38,13 @@
     {% for product in user.product.all %}
             <div class="border rounded " style="background-color: #ffffff;">
                 <div style="margin-left: 10px;">
-                    {% if post.seller.user_profile.profile_pics %}
+                    {% if post.seller.seller_profile.profile_pics %}
                     <img src="/media/{{product.seller.user_profile.profile_pics}}" width="40px" height="40px"
                          style="margin-top: 15px;" class="rounded-circle">
                     {% else %}
                     <img src="/media/default.jpg" width="40px" height="40px" class="rounded-circle">
                     {% endif %}
-                    <a>&nbsp;{{product.seller.user_profile.full_name}}</a>
+                    <a>&nbsp;{{product.seller.seller_profile.full_name}}</a>
                     <a>&nbsp;&nbsp;<i class="fas fa-clock" style="color:#82B6D9;"></i>&nbsp;{{product.upload_date}}</a>
                 </div>
                 <hr>
