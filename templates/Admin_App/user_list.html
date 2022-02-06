@@ -1,0 +1,83 @@
+{% extends 'navbar.html' %}
+{% load crispy_forms_tags %}
+{%block css_block%}
+
+{% endblock%}
+
+{%block body_block%}
+<br><br><br>
+<!-- Sidebar -->
+<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%;padding: 10px;">
+
+    <div>
+        {% if user.admin_profile.profile_pic %}
+    <img src="/media/{{user.admin_profile.profile_pic}}" width="160px" height="160px" class="rounded-circle">
+    {% else %}
+    <img src="/media/default.jpg" width="160px" height="160px" class="rounded-circle">
+    {% endif %}
+    <h1>{{user.username}} &nbsp; <a href="{% url 'Login_App:admin_edit' %}" class="btn btn-light">Edit Profile</a></h1>
+    <h3>{{user.admin_profile.full_name}}</h3>
+    <p>{{user.admin_profile.description|linebreaks}}</p>
+      <a href="{% url 'Admin_App:user_list' %}" class="btn btn-light">Users List</a>
+    </div>
+
+    </div>
+
+
+
+<!-- Page Content -->
+<div style="margin-left:30%">
+
+<div class="w3-container">
+    <div class="card" style="height:auto">
+        <h3 style="text-align: center;"><b>Seller List</b></h3>
+        <div class="card-body">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Full Name</th>
+                <th scope="col">Joining Date</th>
+                  <th scope="col">Action</th>
+              </tr>
+            </thead>
+          <tbody>
+          {% for seller in seller_list %}
+          <tr>
+            <td>{{seller.full_name}}</td>
+            <td>{{seller.dob}}</td>
+              <td><a href="{% url 'Admin_App:delete' id=seller.id %}" class="btn btn-danger">Ban</a></td>
+          </tr>
+          {% endfor %}
+          </tbody>
+          </table>
+        </div>
+    </div>
+    <hr>
+    <div class="card" style="height:auto">
+        <h3 style="text-align: center;"><b>Employee List</b></h3>
+        <div class="card-body">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Full Name</th>
+                <th scope="col">Joining Date</th>
+                  <th scope="col">Action</th>
+
+              </tr>
+            </thead>
+          <tbody>
+          {% for employee in employee_list %}
+          <tr>
+            <td>{{employee.full_name}}</td>
+            <td>{{employee.dob}}</td>
+             <td><a href="/delete/{{employee.id}}" class="btn btn-danger">Ban</a></td>
+          </tr>
+          {% endfor %}
+          </tbody>
+          </table>
+        </div>
+    </div>
+</div>
+</div>
+
+{%endblock%}

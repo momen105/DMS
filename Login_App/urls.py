@@ -16,6 +16,8 @@ urlpatterns = [
     path('seller_edit/',views.seller_prf_edit, name='seller_edit'),
 
 
+
+
     path('employee_signup/', views.employee_signup, name='employee_signup'),
     path('employee_login/', views.employee_login, name='employee_login'),
     path('employee_profile/', views.employee_profile, name='em_profile'),

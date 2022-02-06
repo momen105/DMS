@@ -11,12 +11,12 @@
 
     <div>
         {% if user.seller_profile.profile_pic %}
-    <img src="/media/{{user.user_profile.profile_pic}}" width="160px" height="160px" class="rounded-circle">
+    <img src="/media/{{user.seller_profile.profile_pic}}" width="160px" height="160px" class="rounded-circle">
     {% else %}
     <img src="/media/default.jpg" width="160px" height="160px" class="rounded-circle">
     {% endif %}
 
-        <h1>{{user.username}} &nbsp; <a href="{% url 'Login_App:edit' %}" class="btn btn-light">Edit Profile</a></h1>
+        <h1>{{user.username}} &nbsp; <a href="{% url 'Login_App:seller_edit' %}" class="btn btn-light">Edit Profile</a></h1>
     <h4>{{user.product.count}} Products posts</h4>
 
     <h3>{{user.seller_profile.full_name}}</h3>
@@ -65,9 +65,10 @@
 
 </div>
 </div>
-
-
-
+<!-- The Modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  New Post
+</button>
 
 <!-- The Modal -->
 <div class="modal" id="myModal">
@@ -76,7 +77,7 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Post a Photo</h4>
+        <h4 class="modal-title">Post a Product</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
 

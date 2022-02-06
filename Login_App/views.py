@@ -6,8 +6,8 @@ from Login_App.models import AdminProfile,EmployeeProfile,SellerProfile
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 #from App_Posts.forms import PostForm
-from django.contrib.auth.models import User
-
+from Seller_App.forms import ProductsForm
+from Seller_App.models import Products
 
 # Create your views here.
 def admin_signup(request):
@@ -42,27 +42,15 @@ def admin_profile(request):
 
 @login_required
 def admin_prf_edit(request):
-    if request.user == True:
-        current_user = AdminProfile.objects.get(user=request.user)
-        form = EditAdminProfile(instance=current_user)
-        if request.method == 'POST':
-            form = EditAdminProfile(request.POST, request.FILES, instance=current_user)
-            if form.is_valid():
-                form.save(commit=True)
-                form = EditAdminProfile(instance=current_user)
-                return HttpResponseRedirect(reverse('Login_App:ad_profile'))
-        return render(request, 'Admin_App/edit_profile.html', context={'form': form, 'title': 'Edit Profile . Admin'})
-    else:
-        current_user = User.objects.get(id=1)
-        form = EditAdminProfile(instance=current_user)
-        if request.method == 'POST':
-            form = EditAdminProfile(request.POST, request.FILES, instance=current_user)
-            if form.is_valid():
-                form.save(commit=True)
-                form = EditAdminProfile(instance=current_user)
-                return HttpResponseRedirect(reverse('Login_App:ad_profile'))
-        return render(request, 'Admin_App/edit_profile.html', context={'form': form, 'title': 'Edit Profile . Admin '})
-
+    current_user = AdminProfile.objects.get(user=request.user)
+    form = EditAdminProfile(instance=current_user)
+    if request.method == 'POST':
+        form = EditAdminProfile(request.POST, request.FILES, instance=current_user)
+        if form.is_valid():
+            form.save(commit=True)
+            form = EditAdminProfile(instance=current_user)
+            return HttpResponseRedirect(reverse('Login_App:ad_profile'))
+    return render(request, 'Admin_App/edit_profile.html', context={'form': form, 'title': 'Edit Profile . Admin'})
 
 
 """""---------------------------------Seller----------------------------------"""""
@@ -93,29 +81,27 @@ def seller_login(request):
     return render(request, 'Seller_App/login.html', context={'title':'Login','form':form})
 @login_required
 def seller_profile(request):
-    return render(request, 'Seller_App/profile.html', context={'title':'Employee'})
+    form = ProductsForm()
+    if request.method == 'POST':
+        form = ProductsForm(request.POST, request.FILES)
+        if form.is_valid():
+            product = form.save(commit=False)
+            product.seller = request.user
+            product.save()
+            return HttpResponseRedirect(reverse('Login_App:se_profile'))
+    return render(request, 'Seller_App/profile.html', context={'title':'Seller','form':form})
 @login_required
 def seller_prf_edit(request):
-    if request.user == True:
-        current_user = SellerProfile.objects.get(user=request.user)
-        form = EditSellerProfile(instance=current_user)
-        if request.method == 'POST':
-            form = EditSellerProfile(request.POST, request.FILES, instance=current_user)
-            if form.is_valid():
-                form.save(commit=True)
-                form = EditSellerProfile(instance=current_user)
-                return HttpResponseRedirect(reverse('Login_App:se_profile'))
-        return render(request, 'Seller_App/edit_profile.html', context={'form': form, 'title': 'Edit Profile . Seller'})
-    else:
-        current_user = User.objects.get(id=1)
-        form = EditSellerProfile(instance=current_user)
-        if request.method == 'POST':
-            form = EditSellerProfile(request.POST, request.FILES, instance=current_user)
-            if form.is_valid():
-                form.save(commit=True)
-                form = EditSellerProfile(instance=current_user)
-                return HttpResponseRedirect(reverse('Login_App:se_profile'))
-        return render(request, 'Seller_App/edit_profile.html', context={'form': form, 'title': 'Edit Profile . Seller '})
+    current_user = SellerProfile.objects.get(user=request.user)
+    form = EditSellerProfile(instance=current_user)
+    if request.method == 'POST':
+        form = EditSellerProfile(request.POST, request.FILES, instance=current_user)
+        if form.is_valid():
+            form.save(commit=True)
+            form = EditSellerProfile(instance=current_user)
+            return HttpResponseRedirect(reverse('Login_App:se_profile'))
+    return render(request, 'Seller_App/edit_profile.html', context={'form': form, 'title': 'Edit Profile . Seller'})
+
 
 """""---------------------------------Employee----------------------------------"""""
 
@@ -150,26 +136,15 @@ def employee_profile(request):
     return render(request, 'Employee_App/profile.html', context={'title':'Employee'})
 @login_required
 def employee_prf_edit(request):
-    if request.user == True:
-        current_user = EmployeeProfile.objects.get(user=request.user)
-        form = EditEmployeeProfile(instance=current_user)
-        if request.method == 'POST':
-            form = EditEmployeeProfile(request.POST, request.FILES, instance=current_user)
-            if form.is_valid():
-                form.save(commit=True)
-                form = EditEmployeeProfile(instance=current_user)
-                return HttpResponseRedirect(reverse('Login_App:em_profile'))
-        return render(request, 'Employee_App/edit_profile.html', context={'form': form, 'title': 'Edit Profile . employee'})
-    else:
-        current_user = User.objects.get(id=1)
-        form = EditEmployeeProfile(instance=current_user)
-        if request.method == 'POST':
-            form = EditEmployeeProfile(request.POST, request.FILES, instance=current_user)
-            if form.is_valid():
-                form.save(commit=True)
-                form = EditEmployeeProfile(instance=current_user)
-                return HttpResponseRedirect(reverse('Login_App:em_profile'))
-        return render(request, 'Employee_App/edit_profile.html', context={'form': form, 'title': 'Edit Profile . Employee '})
+    current_user = EmployeeProfile.objects.get(user=request.user)
+    form = EditEmployeeProfile(instance=current_user)
+    if request.method == 'POST':
+        form = EditEmployeeProfile(request.POST, request.FILES, instance=current_user)
+        if form.is_valid():
+            form.save(commit=True)
+            form = EditEmployeeProfile(instance=current_user)
+            return HttpResponseRedirect(reverse('Login_App:em_profile'))
+    return render(request, 'Employee_App/edit_profile.html', context={'form': form, 'title': 'Edit Profile . Employee'})
 
 
 @login_required
