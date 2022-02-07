@@ -1,0 +1,61 @@
+{% extends 'navbar.html' %}
+{% load crispy_forms_tags %}
+{%block css_block%}
+
+{% endblock%}
+
+{%block body_block%}
+<br><br><br>
+<!-- Sidebar -->
+<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%;padding: 10px;">
+
+    <div>
+        {% if user.admin_profile.profile_pic %}
+    <img src="/media/{{user.admin_profile.profile_pic}}" width="160px" height="160px" class="rounded-circle">
+    {% else %}
+    <img src="/media/default.jpg" width="160px" height="160px" class="rounded-circle">
+    {% endif %}
+    <h1>{{user.username}} &nbsp; <a href="{% url 'Login_App:admin_edit' %}" class="btn btn-light">Edit Profile</a></h1>
+    <h3>{{user.admin_profile.full_name}}</h3>
+    <p>{{user.admin_profile.description|linebreaks}}</p>
+    <a href="{% url 'Admin_App:user_list' %}" class="btn btn-light">Users List</a>
+    <a href="{% url 'Admin_App:product_list' %}" class="btn btn-light">Products List</a>
+    </div>
+
+    </div>
+
+
+
+<!-- Page Content -->
+<div style="margin-left:30%">
+
+<div class="w3-container">
+    <div class="card" style="height:auto">
+        <h3 style="text-align: center;"><b>Products List</b></h3>
+        <div class="card-body">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">seller Name</th>
+                <th scope="col">descriptions</th>
+                  <th scope="col">upload_date</th>
+                  <th scope="col">Actions</th>
+              </tr>
+            </thead>
+          <tbody>
+          {% for product in product_list %}
+          <tr>
+            <td>{{product.seller.seller_profile.full_name}}</td>
+              <td>{{product.descriptions}}</td>
+              <td>{{product.upload_date}}</td>
+              <td><a href="{% url 'Admin_App:app' id=product.id %}" class="btn btn-danger">Approve</a></td>
+          </tr>
+          {% endfor %}
+          </tbody>
+          </table>
+        </div>
+    </div>
+</div>
+</div>
+
+{%endblock%}
