@@ -1,35 +1,56 @@
-{% extends 'navbar.html' %}
+{% extends 'Admin_App/admin_nav.html' %}
 {% load crispy_forms_tags %}
 {%block css_block%}
 
 {% endblock%}
 
 {%block body_block%}
-<br><br><br>
+<br><br>
 <!-- Sidebar -->
 <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%;padding: 10px;">
+    <div class="row" style="margin-left: 10px;">
 
-    <div>
-        {% if user.admin_profile.profile_pic %}
-    <img src="/media/{{user.admin_profile.profile_pic}}" width="160px" height="160px" class="rounded-circle">
-    {% else %}
-    <img src="/media/default.jpg" width="160px" height="160px" class="rounded-circle">
-    {% endif %}
-    <h1>{{user.username}} &nbsp; <a href="{% url 'Login_App:admin_edit' %}" class="btn btn-light">Edit Profile</a></h1>
-    <h3>{{user.admin_profile.full_name}}</h3>
+        <div >
+            {% if user.admin_profile.profile_pic %}
+            <img src="/media/{{user.admin_profile.profile_pic}}" width="100px" height="100px" class="rounded-circle">
+            {% else %}
+            <img src="/media/default.jpg" width="100px" height="100px" class="rounded-circle">
+            {% endif %}
+        </div>
+        <div>
+            <h4>&nbsp; {{user.username}} </h4>
+            <h3>&nbsp; {{user.admin_profile.full_name}}</h3>
+        </div>
+    </div>
+    <hr style="border-top: 1px solid #0d1215;">
     <p>{{user.admin_profile.description|linebreaks}}</p>
-      <a href="{% url 'Admin_App:user_list' %}" class="btn btn-light">Users List</a>
-        <a href="{% url 'Admin_App:product_list' %}" class="btn btn-light">Users List</a>
+    <ul style="list-style-type: none; margin: 0; padding: 0;">
+        <li>
+           <a href="{% url 'Home_App:ad_home' %}" class="w3-bar-item w3-button">Home</a>
+        </li>
+        <li>
+           <a href="{% url 'Login_App:admin_edit' %}" class="w3-bar-item w3-button">Edit Profile</a>
+        </li>
+
+        <li>
+           <a href="{% url 'Admin_App:user_list' %}" class="w3-bar-item w3-button">Users List</a>
+        </li>
+
+        <li >
+            <a href="{% url 'Admin_App:product_list' %}" class="w3-bar-item w3-button">Products List</a>
+        </li>
+
+        <li>
+              <a class="w3-bar-item w3-button" href="{% url 'Login_App:logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
+
+        </li>
+    </ul>
     </div>
-
-    </div>
-
-
 
 <!-- Page Content -->
 <div style="margin-left:30%">
-
 <div class="w3-container">
+    <br>
     <div class="card" style="height:auto">
         <h3 style="text-align: center;"><b>Seller List</b></h3>
         <div class="card-body">

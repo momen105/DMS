@@ -33,7 +33,7 @@ def admin_login(request):
             admin = authenticate(username=username, password=password)
             if admin is not None:
                 login(request, admin)
-                return HttpResponseRedirect(reverse('Login_App:admin_edit'))
+                return HttpResponseRedirect(reverse('Login_App:ad_profile'))
     return render(request, 'Admin_App/login.html', context={'title':'Login','form':form})
 
 @login_required
@@ -51,7 +51,6 @@ def admin_prf_edit(request):
             form = EditAdminProfile(instance=current_user)
             return HttpResponseRedirect(reverse('Login_App:ad_profile'))
     return render(request, 'Admin_App/edit_profile.html', context={'form': form, 'title': 'Edit Profile . Admin'})
-
 
 """""---------------------------------Seller----------------------------------"""""
 def seller_signup(request):
@@ -77,7 +76,7 @@ def seller_login(request):
             seller = authenticate(username=username, password=password)
             if seller is not None:
                 login(request, seller)
-                return HttpResponseRedirect(reverse('Login_App:seller_edit'))
+                return HttpResponseRedirect(reverse('Login_App:se_profile'))
     return render(request, 'Seller_App/login.html', context={'title':'Login','form':form})
 @login_required
 def seller_profile(request):
@@ -145,7 +144,6 @@ def employee_prf_edit(request):
             form = EditEmployeeProfile(instance=current_user)
             return HttpResponseRedirect(reverse('Login_App:em_profile'))
     return render(request, 'Employee_App/edit_profile.html', context={'form': form, 'title': 'Edit Profile . Employee'})
-
 
 @login_required
 def logout_user(request):

@@ -5,13 +5,15 @@
 <center>
 <div class="log_in border rounded mt-5 col-sm-6">
   <br>
+    <h3>Enter Your Account</h3>
   <form method="POST">
     {{form|crispy}}
     {% csrf_token %}
     <button type="submit" class="btn btn-primary" style="width:100%">Log In</button>
   </form>
+  <br>
 </div>
-<br>
+  <br>
 <div class="sign_up">
   <p>Don't have an account? <a href="{% url 'Login_App:admin_signup' %}">Sign up</a></p>
 </div>

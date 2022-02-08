@@ -1,14 +1,10 @@
-{% extends 'navbar.html' %}
+
+{% extends 'Seller_App/seller_nav.html' %}
 {% load crispy_forms_tags %}
-{%block css_block%}
-
-{% endblock%}
-
 {%block body_block%}
 <br><br><br>
 <!-- Sidebar -->
 <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%;padding: 10px;">
-
     <div>
         {% if user.seller_profile.profile_pic %}
     <img src="/media/{{user.seller_profile.profile_pic}}" width="160px" height="160px" class="rounded-circle">

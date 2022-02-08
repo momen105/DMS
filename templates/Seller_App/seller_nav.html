@@ -22,40 +22,28 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
                 <li>
-                    <a class="nav-link" href="{% url 'Home_App:home' %}">Home</a>
+                    <a class="nav-link" href="{% url 'Home_App:se_home' %}">Home</a>
                 </li>
                 <li>
                     <a class="nav-link" href="#">About</a>
                 </li>
                 <li>
-                    <a class="nav-link" href="#">Products</a>
+                    <a class="nav-link" href="#">Services</a>
                 </li>
                 {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                    {% if user.admin_profile.profile_pic %}
-                    <a class="nav-link" href="{% url 'Login_App:ad_profile' %}"><img
-                            src="/media/{{user.admin_profile.profile_pic}}" width="40px" height="40px" class="rounded-circle"></a>
-                    {% elif user.seller_profile.profile_pic %}
-                    <a class="nav-link" href="{% url 'Login_App:se_profile' %}"><img src="/media/{{user.seller_profile.profile_pic}}" width="40px" height="40px" class="rounded-circle"></a>
-                    {% elif user.employee_profile.profile_pic %}
-                    <a class="nav-link" href="{% url 'Login_App:em_profile' %}"><img src="/media/{{user.employee_profile.profile_pic}}" width="40px" height="40px" class="rounded-circle"></a>
-                    {% else %}
-                    <a class="nav-link" href="#"><img src="/media/default.jpg" width="40px" height="40px" class="rounded-circle"></a>
-                    {% endif %}
+                      {% if user.seller_profile.profile_pic %}
+                          <a class="nav-link" href="{% url 'Login_App:se_profile' %}"><img src="/media/{{user.seller_profile.profile_pic}}" width="40px" height="40px" class="rounded-circle"></a>
+                      {% else %}
+                           <a class="nav-link" href="{% url 'Login_App:se_profile' %}"><img src="/media/default.jpg" width="40px" height="40px" class="rounded-circle"></a>
+                       {% endif %}
                 </li>
                 <li>
                     <a class="nav-link " href="{% url 'Login_App:logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
                 </li>
                 {% else %}
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Login
-                  </a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Admin Login</a></li>
-                    <li><a class="dropdown-item" href="#">Seller Login</a></li>
-                    <li><a class="dropdown-item" href="#">Employee Login</a></li>
-                  </ul>
+                <li>
+                    <a class="nav-link " href="{% url 'Login_App:seller_logout' %}"><i class="fas fa-sign-out-alt"></i>Login</a>
                 </li>
                 {% endif %}
             </ul>
