@@ -6,7 +6,7 @@
 <!-- Page Content -->
 <div class="w3-container">
     <div class="card" style="height:auto">
-        <h3 style="text-align: center;"><b>Products List</b></h3>
+        <h3 style="text-align: center;"><b>Available Products</b></h3>
         <div class="card-body">
           <table class="table table-hover">
             <thead>
@@ -23,8 +23,7 @@
             <td>{{product.seller.seller_profile.full_name}}</td>
               <td>{{product.descriptions}}</td>
               <td>{{product.upload_date}}</td>
-              <td><a href="">Confirm</a></td>
-
+              <td><a href="{% url 'Employee_App:confirm' pk=product.pk %}">Confirm</a></td>
           </tr>
           {% endfor %}
           </tbody>

@@ -26,6 +26,8 @@ class Products(models.Model):
     descriptions = models.CharField(max_length=264, blank=True)
     upload_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
+    address = models.CharField(max_length=264, blank=False)
+    price = models.FloatField(default=0.00)
     public = models.BooleanField(default=False)
     private = models.BooleanField(default=True)
 
@@ -40,6 +42,12 @@ class Products(models.Model):
     def is_private(self):
         return self.private
 
-
     class Meta:
         ordering = ['-upload_date', ]
+
+class ConfirmProduct(models.Model):
+    products = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='confirm_product')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='del_man')
+    date_created = models.DateTimeField(auto_now_add=True)
+
+

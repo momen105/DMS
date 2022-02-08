@@ -15,7 +15,6 @@ class AdminHome(View):
         user = request.user
         product_post = Products.objects.filter(public=True)
         seller_list = SellerProfile.objects.all()
-
         return render(request, 'Admin_App/home.html',context={'title': 'Admin', 'product_post': product_post, 'seller_list': seller_list})
 class SellerHome(View):
     def get(self, request):

@@ -91,6 +91,7 @@ def seller_profile(request):
     return render(request, 'Seller_App/profile.html', context={'title':'Seller','form':form})
 @login_required
 def seller_prf_edit(request):
+
     current_user = SellerProfile.objects.get(user=request.user)
     form = EditSellerProfile(instance=current_user)
     if request.method == 'POST':

@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'Login_App',
     'Home_App',
     'Seller_App',
+    'Employee_App',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

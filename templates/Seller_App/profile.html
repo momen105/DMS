@@ -44,12 +44,19 @@
                     <a>&nbsp;&nbsp;<i class="fas fa-clock" style="color:#82B6D9;"></i>&nbsp;{{product.upload_date}}</a>
                 </div>
                 <hr>
-                <div class="post_caption" style="margin-left: 10px; margin-bottom: 10px;">
-                    {{product.descriptions}}
+                <div class="row">
+                    <div class="col-6 " style="margin: 10px;">
+                   <p> <b>Descriptions :</b> {{product.descriptions}}</p>
+                        <hr>
+                       <p><b>Address :</b> {{product.address}}</p>
+                       <p><b>Price :</b> {{product.price}}</p>
+
                 </div>
-                <br>
-                <img class="crop mx-auto d-block" src="/media/{{product.image}}">
-                <br>
+                <div>
+                    <img class="crop mx-auto d-block" src="/media/{{product.image}}">
+                </div>
+            </div>
+
             </div>
             <hr>
             {% endfor %}
