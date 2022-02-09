@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
 from Login_App.forms import CreateNewUser, EditAdminProfile,EditEmployeeProfile,EditSellerProfile
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse, reverse_lazy
 from Login_App.models import AdminProfile,EmployeeProfile,SellerProfile
@@ -38,7 +39,27 @@ def admin_login(request):
 
 @login_required
 def admin_profile(request):
-    return render(request, 'Admin_App/profile.html', context={'title':'Admin'})
+    seller = SellerProfile.objects.all()
+    seller_count = seller.count()
+    employee = EmployeeProfile.objects.all()
+    employee_count = employee.count()
+    product = Products.objects.all()
+    product_count = product.count()
+    user = User.objects.all()
+    user_count = user.count()
+    product_active = Products.objects.filter(public=True)
+    active = product_active.count()
+    context = {'title': 'Admin',
+               'seller_count': seller_count,
+               'Seller': seller,
+               'employee_count': employee_count,
+               'product_count': product_count,
+               'user_count': user_count,
+               'product': product,
+               'active':active,}
+
+
+    return render(request, 'Admin_App/profile.html',context)
 
 @login_required
 def admin_prf_edit(request):

@@ -5,26 +5,28 @@
 {% endblock%}
 
 {%block body_block%}
-<br><br>
 <!-- Sidebar -->
-<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%;padding: 10px;">
-    <div class="row" style="margin-left: 10px;">
-
-        <div >
+<div class="w3-sidebar  w3-bar-block" style="width:25%;padding: 10px; overflow: hidden; background-color: #96cbeb;">
+    <div class="row">
+        <div class="col-3">
             {% if user.admin_profile.profile_pic %}
             <img src="/media/{{user.admin_profile.profile_pic}}" width="100px" height="100px" class="rounded-circle">
             {% else %}
             <img src="/media/default.jpg" width="100px" height="100px" class="rounded-circle">
             {% endif %}
         </div>
-        <div>
-            <h4>&nbsp; {{user.username}} </h4>
-            <h3>&nbsp; {{user.admin_profile.full_name}}</h3>
+        <div class="col-6">
+            <h4>&nbsp; &nbsp;&nbsp;{{user.username}} </h4>
+            <h3>&nbsp; &nbsp;&nbsp;{{user.admin_profile.full_name}}</h3>
         </div>
     </div>
     <hr style="border-top: 1px solid #0d1215;">
     <p>{{user.admin_profile.description|linebreaks}}</p>
     <ul style="list-style-type: none; margin: 0; padding: 0;">
+        <li>
+           <a href="{% url 'Login_App:ad_profile' %}" class="w3-bar-item w3-button">Dashboard</a>
+        </li>
+
         <li>
            <a href="{% url 'Home_App:ad_home' %}" class="w3-bar-item w3-button">Home</a>
         </li>
@@ -48,7 +50,7 @@
     </div>
 
 <!-- Page Content -->
-<div style="margin-left:30%">
+<div style="margin-left:25%">
 <div class="w3-container">
     <br>
     <div class="card" style="height:auto">

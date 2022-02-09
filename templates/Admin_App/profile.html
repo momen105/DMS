@@ -1,27 +1,29 @@
-{% extends 'Admin_App/admin_nav.html' %}
+{% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
 {%block body_block%}
-<br><br>
-<!-- Sidebar -->
-<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%;padding: 10px;">
-    <div class="row" style="margin-left: 10px;">
 
-        <div >
+<div class="w3-sidebar  w3-bar-block" style="width:25%;padding: 10px; overflow: hidden; background-color: #96cbeb;">
+    <div class="row">
+        <div class="col-3">
             {% if user.admin_profile.profile_pic %}
             <img src="/media/{{user.admin_profile.profile_pic}}" width="100px" height="100px" class="rounded-circle">
             {% else %}
             <img src="/media/default.jpg" width="100px" height="100px" class="rounded-circle">
             {% endif %}
         </div>
-        <div>
-            <h4>&nbsp; {{user.username}} </h4>
-            <h3>&nbsp; {{user.admin_profile.full_name}}</h3>
+        <div class="col-6">
+            <h4>&nbsp; &nbsp;&nbsp;{{user.username}} </h4>
+            <h3>&nbsp; &nbsp;&nbsp;{{user.admin_profile.full_name}}</h3>
         </div>
     </div>
     <hr style="border-top: 1px solid #0d1215;">
     <p>{{user.admin_profile.description|linebreaks}}</p>
     <ul style="list-style-type: none; margin: 0; padding: 0;">
+        <li>
+           <a href="{% url 'Login_App:ad_profile' %}" class="w3-bar-item w3-button">Dashboard</a>
+        </li>
+
         <li>
            <a href="{% url 'Home_App:ad_home' %}" class="w3-bar-item w3-button">Home</a>
         </li>
@@ -43,4 +45,165 @@
         </li>
     </ul>
     </div>
+
+<!-- Page Content -->
+<div style="margin-left:25%">
+<div class="w3-container">
+    <br>
+    <div class="row">
+        <div class="col-2">
+            <div class="card text-center" style="width: 10rem; background-color: #38aa89;">
+                <h4 style="">Total Product</h4>
+               <i class="fa-solid fa-user"></i>
+                <hr>
+              <div class="card-body">
+                85
+              </div>
+            </div>
+        </div>
+        <div class="col-2">
+           <div class="card text-center" style="width: 8rem; background-color: #82b6d9;">
+                <h4>Total User</h4>
+               <i class="fa-solid fa-users"></i>
+               <hr>
+              <div class="card-body">
+                {{user_count}}
+              </div>
+            </div>
+
+        </div>
+        <div class="col-2">
+           <div class="card text-center" style="width: 8rem; background-color: #008000;">
+                <h4>Total Seller</h4>
+               <i class="fa-solid fa-users"></i>
+               <hr>
+              <div class="card-body">
+                {{seller_count}}
+              </div>
+            </div>
+        </div>
+        <div class="col-2">
+           <div class="card text-center" style="width: 10rem; background-color: #82b6d9;">
+                <h4>Total Employee</h4>
+                <i class="fa-solid fa-users"></i>
+               <hr>
+              <div class="card-body">
+                {{employee_count}}
+              </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="ticker " style="display:flex;flex-wrap:warp; width:100%; height:50px;">
+        <div class="title" style="width:25%; text-align:center;background:#c81c1c;">
+            <h3>Breaking News</h3>
+        </div>
+        <div class="news" style="width:80%; background:#cc4444; padding: 13px;">
+            <marquee>
+                <p>
+                    In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.
+                </p>
+            </marquee>
+
+        </div>
+
+    </div>
+  <!----------------------Graphs----------------->
+    <div class="container">
+        <div class="row my-5">
+            <div class="col-md-6">
+                <div class="bg-white">
+                    <canvas id="myChart1" width="400" height="300"></canvas>
+                    <script>
+                        var ctx = document.getElementById('myChart1').getContext('2d');
+                        var myChart1 = new Chart(ctx, {
+                            type: 'pie',
+                            data: {
+                                labels: ['Electrical','Grocery','garments','Stationery'],
+                                datasets: [{
+                                    label: 'Products Type',
+                                    data: [50,5,20,10],
+                                    backgroundColor: [
+                                        'rgba(255, 99, 132, 1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 206, 86, 1)',
+                                        'rgba(75, 192, 192, 1)',
+                                        'rgba(153, 102, 255, 1)',
+                                        'rgba(255, 159, 64, 1)'
+                                    ],
+                                    borderColor: [
+                                        'rgba(255, 99, 132, 1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 206, 86, 1)',
+                                        'rgba(75, 192, 192, 1)',
+                                        'rgba(153, 102, 255, 1)',
+                                        'rgba(255, 159, 64, 1)'
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="bg-white">
+                    <canvas id="myChart" width="400" height="300"></canvas>
+                    <script>
+                        var ctx = document.getElementById('myChart').getContext('2d');
+                        var myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ['Active','rejected','Processing'],
+                                datasets: [{
+                                    label: 'Products Details',
+                                    data: [10,4,6],
+                                    backgroundColor: [
+                                        'rgba(255, 99, 132, 1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 206, 86, 1)',
+                                        'rgba(75, 192, 192, 1)',
+                                        'rgba(153, 102, 255, 1)',
+                                        'rgba(255, 159, 64, 1)'
+                                    ],
+                                    borderColor: [
+                                        'rgba(255, 99, 132, 1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 206, 86, 1)',
+                                        'rgba(75, 192, 192, 1)',
+                                        'rgba(153, 102, 255, 1)',
+                                        'rgba(255, 159, 64, 1)'
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Graphs-->
+
+</div>
+</div>
+
 {%endblock%}

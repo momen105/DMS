@@ -12,20 +12,62 @@
 <style>
 
 </style>
-<body style="background-color:#E6F5FC">
-<div class="container">
-    <div class="row">
-    <div class="home_img " style="margin-top: 97px;">
-    <img src="/media/pic.jpg" alt="" >
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">DMS</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Services</a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link" href="#">Login</a>
+        </li>
+           </li>
+          <li class="nav-item">
+          <a class="nav-link" href="#">Signup</a>
+        </li>
+      </ul>
     </div>
-    <div class="home_button" style="margin-top: 110px;">
-        <h3 class ="alert" ><b>Create New Account</b></h3>
-        &nbsp; &nbsp; &nbsp;<p><a class="btn btn-outline-danger" href="{% url 'Login_App:admin_signup' %}" role="button">SignUp As Admin</a>&nbsp; &nbsp;Already have an account? <a href="#">Login Here</a></p>
-        &nbsp; &nbsp; &nbsp;<p><a class="btn btn-outline-danger" href="{% url 'Login_App:seller_signup' %}" role="button">SignUp As Seller</a>&nbsp; &nbsp;Already have an account? <a href="#">Login Here</a></p>
-        &nbsp; &nbsp; &nbsp;<p><a class="btn btn-outline-danger" href="{% url 'Login_App:employee_signup' %}" role="button">SignUp As Employee</a>&nbsp; &nbsp;Already have an account? <a href="#">Login Here</a></p>
+  </div>
+</nav>
+
+
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="/media/slider_1.jpg" class="d-block w-100" alt="..." height="320px;">
+      <div class="carousel-caption d-none d-md-block">
+      </div>
     </div>
 
-</div></div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
 
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
