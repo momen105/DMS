@@ -9,6 +9,9 @@ from django.shortcuts import render
 class Index(View):
     def get(self, request):
         return render(request, 'index.html',)
+class LoginPage(View):
+    def get(self, request):
+        return render(request, 'front_page.html',)
 
 class AdminHome(View):
     def get(self, request):

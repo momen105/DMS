@@ -5,6 +5,8 @@ from django.urls import path
 app_name = 'Employee_App'
 
 urlpatterns = [
-    path('confirm/<pk>/', views.confirm, name='confirm'),
+    path('conf/<int:id>', views.confirm, name='confirm'),
+    path('cart/', views.cart_view, name="cart"),
+    path('employee_dashboard/',views.dashboard, name= 'em_dashboard')
 
 ]

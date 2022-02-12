@@ -32,7 +32,9 @@ INSTALLED_APPS = [
     'Home_App',
     'Seller_App',
     'Employee_App',
+    'Payment_App',
 ]
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [

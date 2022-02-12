@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block body_block %}
+{% load cart_tag %}
+<div class="container my-5">
+    <div class="my-5">
+        <h2>Your Cart</h2>
+    </div>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+
+            <th scope="col">Product Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for cart in carts %}
+        <tr>
+            <td>{{cart.product.seller.seller_profile.Full_name}}</td>
+            <td>
+                {{ cart.quantity }}
+            </td>
+            <td>&#2547; {{cart.get_total}}</td>
+
+        </tr>
+        {% endfor %}
+        <tr>
+            <th scope="row"></th>
+            <td colspan="1">Total</td>
+            <td>&#2547;{{order.get_totals | floatformat:2 }}</td>
+            <td></td>
+        </tr>
+        <tr>
+            <th scope="row"></th>
+            <td colspan="4" class="text-right">
+                <a href="#" class="btn btn-success mr-4">Proceed To Checkout</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

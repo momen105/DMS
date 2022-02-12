@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+{%block body_block%}
 <div class="container">
     <div class="row">
     <div class="home_img " style="margin-top: 97px;">
@@ -5,9 +7,10 @@
     </div>
     <div class="home_button" style="margin-top: 110px;">
         <h3 class ="alert" ><b>Create New Account</b></h3>
-        &nbsp; &nbsp; &nbsp;<p><a class="btn btn-outline-danger" href="{% url 'Login_App:admin_signup' %}" role="button">SignUp As Admin</a>&nbsp; &nbsp;Already have an account? <a href="#">Login Here</a></p>
-        &nbsp; &nbsp; &nbsp;<p><a class="btn btn-outline-danger" href="{% url 'Login_App:seller_signup' %}" role="button">SignUp As Seller</a>&nbsp; &nbsp;Already have an account? <a href="#">Login Here</a></p>
-        &nbsp; &nbsp; &nbsp;<p><a class="btn btn-outline-danger" href="{% url 'Login_App:employee_signup' %}" role="button">SignUp As Employee</a>&nbsp; &nbsp;Already have an account? <a href="#">Login Here</a></p>
+        &nbsp; &nbsp; &nbsp;<p style="margin-left: 10px;"><a class="btn btn-outline-danger" href="{% url 'Login_App:admin_signup' %}" role="button">SignUp As Admin</a>&nbsp; &nbsp;Already have an account? <a href="{% url 'Login_App:admin_login' %}">Login Here</a></p>
+        &nbsp; &nbsp; &nbsp;<p style="margin-left: 10px;"><a class="btn btn-outline-danger" href="{% url 'Login_App:seller_signup' %}" role="button">SignUp As Seller</a>&nbsp; &nbsp;Already have an account? <a href="{% url 'Login_App:seller_login' %}">Login Here</a></p>
+        &nbsp; &nbsp; &nbsp;<p style="margin-left: 10px;"><a class="btn btn-outline-danger" href="{% url 'Login_App:employee_signup' %}" role="button">SignUp As Employee</a>&nbsp; &nbsp;Already have an account? <a href="{% url 'Login_App:employee_login' %}">Login Here</a></p>
     </div>
 
 </div></div>
+{% endblock %}

@@ -149,7 +149,7 @@ def employee_login(request):
             employee = authenticate(username=username, password=password)
             if employee is not None:
                 login(request, employee)
-                return HttpResponseRedirect(reverse('Login_App:employee_edit'))
+                return HttpResponseRedirect(reverse('Employee_App:em_dashboard'))
     return render(request, 'Employee_App/login.html', context={'title':'Login','form':form})
 
 @login_required

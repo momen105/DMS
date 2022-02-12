@@ -10,6 +10,7 @@ urlpatterns = [
     path('seller/', include('Seller_App.urls')),
     path('admin_page/', include('Admin_App.urls')),
     path('employee/', include('Employee_App.urls')),
+    path('payment/', include('Payment_App.urls')),
 
 ]
 urlpatterns += staticfiles_urlpatterns()

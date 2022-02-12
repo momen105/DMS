@@ -1,4 +1,4 @@
-{% extends 'Employee_App/employee_nav.html' %}
+{% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block body_block %}
 <br><br><br>
@@ -13,6 +13,7 @@
                 <th scope="col">seller Name</th>
                 <th scope="col">descriptions</th>
                   <th scope="col">upload_date</th>
+                  <th scope="col">Action</th>
               </tr>
             </thead>
           <tbody>
@@ -21,6 +22,7 @@
             <td>{{product.seller.seller_profile.full_name}}</td>
               <td>{{product.descriptions}}</td>
               <td>{{product.upload_date}}</td>
+              <td><a href="{% url 'Employee_App:confirm' id=product.id %}">Confirm</a></td>
           </tr>
           {% endfor %}
           </tbody>

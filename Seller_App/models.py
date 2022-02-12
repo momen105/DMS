@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+from django.utils import timezone
+
 
 class PostManager(models.Manager):
     def active(self, *args, **kwargs):
