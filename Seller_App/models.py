@@ -31,7 +31,7 @@ class Products(models.Model):
     address = models.CharField(max_length=264, blank=False)
     price = models.FloatField(default=0.00)
     public = models.BooleanField(default=False)
-    private = models.BooleanField(default=True)
+    private = models.BooleanField(default=False)
 
 
     objects = PostManager()

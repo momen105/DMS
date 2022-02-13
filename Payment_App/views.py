@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 # for payment
 import requests
 from decimal import Decimal
-from sslcommerz_python_api import SSLCSession
+from sslcommerz_python_api.payment import SSLCSession
 import socket
 from django.views.decorators.csrf import csrf_exempt
 
@@ -42,12 +42,10 @@ def payment(request):
     if not saved_address.is_fully_filled():
         return redirect("Payment_App:checkout")
 
-    if not request.user.employee_profile.is_fully_filled():
 
-        return redirect("Login_App:employee_edit")
 
-    store_id = 'tohin60e20e610b86f'
-    API_key = 'tohin60e20e610b86f@ssl'
+    store_id = 'dms6207d2d48ad46'
+    API_key = 'dms6207d2d48ad46@ssl'
 
     mypayment = SSLCSession(sslc_is_sandbox=True, sslc_store_id=store_id, sslc_store_pass=API_key)
 
@@ -56,17 +54,17 @@ def payment(request):
     mypayment.set_urls(success_url=status_url, fail_url=status_url, cancel_url=status_url, ipn_url=status_url)
 
     order_qs = Order.objects.filter(user=request.user, ordered=False)
-    order_product = order_qs[0].orderitems.all()
-    order_product_count = order_qs[0].orderitems.count()
+    order_product = order_qs[0].orderproduct.all()
+    order_product_count = order_qs[0].orderproduct.count()
     order_total = order_qs[0].get_totals()
 
     mypayment.set_product_integration(total_amount=Decimal(order_total), currency='BDT', product_category='Mixed', product_name=order_product, num_of_item=order_product_count, shipping_method='Courier', product_profile='None')
 
 
     current_user = request.user
-    mypayment.set_customer_info(name=current_user.profile.full_name, email=current_user.email, address1=current_user.profile.address_1, address2=current_user.profile.address_1, city=current_user.profile.city, postcode=current_user.profile.zipcode, country=current_user.profile.country, phone=current_user.profile.phone)
+    mypayment.set_customer_info(name=current_user.employee_profile.full_name, email=current_user.email, address1=current_user.employee_profile.address_1, address2=current_user.employee_profile.address_1, city=current_user.employee_profile.city, postcode=current_user.employee_profile.zipcode, country=current_user.employee_profile.country, phone=current_user.employee_profile.phone)
 
-    mypayment.set_shipping_info(shipping_to=current_user.profile.full_name, address=saved_address.address, city=saved_address.city, postcode=saved_address.zipcode, country=saved_address.country)
+    mypayment.set_shipping_info(shipping_to=current_user.employee_profile.full_name, address=saved_address.address, city=saved_address.city, postcode=saved_address.zipcode, country=saved_address.country)
 
     response_data = mypayment.init_payment()
     return redirect(response_data['GatewayPageURL'])
@@ -100,7 +98,7 @@ def purchase(request, val_id, tran_id):
     for item in cart_items:
         item.taken = True
         item.save()
-    return HttpResponseRedirect(reverse("Login_App:en_profile"))
+    return HttpResponseRedirect(reverse("Login_App:em_profile"))
 
 @login_required
 def order_view(request):
@@ -108,6 +106,5 @@ def order_view(request):
         orders = Order.objects.filter(user=request.user, ordered=True)
         context = {"orders": orders}
     except:
-        messages.warning(request, "You do no have an active order")
-        return redirect("Login_App:en_profile")
-    return render(request, "order.html", context)
+        return redirect("Login_App:em_profile")
+    return render(request, "Employee_App/order.html", context)

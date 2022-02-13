@@ -43,20 +43,41 @@
         </li>
     </ul>
     </div>
+</div>
 
-<!-- Page Content -->
+
 <div style="margin-left:25%">
 <div class="w3-container">
-<div class="d-block m-auto border rounded mt-2 col-sm-9">
-  <p><b><h2 style="text-align: center;">Complete Profile</h2></b></p>
-  <form method="POST" enctype="multipart/form-data" >
-  {{form|crispy}}
-  {% csrf_token %}
-  <button type="submit" name="button" class='btn btn-primary'>Submit</button>
     <br>
-</form>
-  <br>
+    <div class="card" style="height:auto">
+        <h3 style="text-align: center;"><b>Products</b></h3>
+        <div class="card-body">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">seller Name</th>
+                <th scope="col">descriptions</th>
+                  <th scope="col">upload_date</th>
+              </tr>
+            </thead>
+          <tbody>
+          <tr>
+            <td>{{product.seller.seller_profile.full_name}}</td>
+              <td>{{product.descriptions}}</td>
+              <td>{{product.upload_date}}</td>
+          </tr>
+
+          </tbody>
+          </table>
+        </div>
+    </div>
+    <hr>
+            <div class="row border rounded">
+               <p><b>Mail Has been send</b></p>
+                </div>
+
+            </div>
 </div>
 </div>
-</div>
-{% endblock %}
+
+{%endblock%}

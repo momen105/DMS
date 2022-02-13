@@ -48,51 +48,7 @@
 
 <div style="margin-left:25%">
 <div class="w3-container">
-    <br>
-     <div class="row">
-        <div class="col-2">
-            <div class="card text-center" style="width: 10rem; background-color: #38aa89;">
-                <h4 style="">Total Product</h4>
-               <i class="fa-solid fa-user"></i>
-                <hr>
-              <div class="card-body">
-                85
-              </div>
-            </div>
-        </div>
-        <div class="col-2">
-           <div class="card text-center" style="width: 8rem; background-color: #82b6d9;">
-                <h4>Total User</h4>
-               <i class="fa-solid fa-users"></i>
-               <hr>
-              <div class="card-body">
-                {{user_count}}
-              </div>
-            </div>
 
-        </div>
-        <div class="col-2">
-           <div class="card text-center" style="width: 8rem; background-color: #008000;">
-                <h4>Total Seller</h4>
-               <i class="fa-solid fa-users"></i>
-               <hr>
-              <div class="card-body">
-                {{seller_count}}
-              </div>
-            </div>
-        </div>
-        <div class="col-2">
-           <div class="card text-center" style="width: 10rem; background-color: #82b6d9;">
-                <h4>Total Employee</h4>
-                <i class="fa-solid fa-users"></i>
-               <hr>
-              <div class="card-body">
-                {{employee_count}}
-              </div>
-            </div>
-        </div>
-    </div>
-    <br>
     <div class="card" style="height:auto">
         <h3 style="text-align: center;"><b>Products List</b></h3>
         <div class="card-body">
@@ -111,11 +67,24 @@
             <td>{{product.seller.seller_profile.full_name}}</td>
               <td>{{product.descriptions}}</td>
               <td>{{product.upload_date}}</td>
-              <td><a href="{% url 'Admin_App:app' id=product.id %}" class="btn btn-danger">Approve</a></td>
+
+             <!-- <td><a href="{% url 'Admin_App:app' id=product.id %}" class="btn btn-danger">Approve</a></td> -->
+              <td>
+                  {% if product.public == True %}
+                          <a href="{% url 'Admin_App:app' id=product.id %}" class="btn btn-success">Approve</a>
+                  {% elif product.private == True %}
+                       <a href="#" class="btn btn-danger">Rejected</a>
+                  {% else %}
+                  <a href="{% url 'Admin_App:product_details' id=product.id %}" class="btn btn-secondary">View details</a>
+
+                  {% endif %}
+
+              </td>
           </tr>
           {% endfor %}
           </tbody>
           </table>
+
         </div>
     </div>
 </div>

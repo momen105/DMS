@@ -19,20 +19,19 @@
     <hr style="border-top: 1px solid #0d1215;">
     <p>{{user.admin_profile.description|linebreaks}}</p>
     <ul style="list-style-type: none; margin: 0; padding: 0;">
-
-        <li>
-           <a href="{% url 'Employee_App:em_dashboard' %}" class="w3-bar-item w3-button">Dashboard</a>
-        </li>
          <li>
            <a href="{% url 'Home_App:em_home' %}" class="w3-bar-item w3-button">Home</a>
-        </li>
-
-        <li>
-           <a href="{% url 'Login_App:employee_edit' %}" class="w3-bar-item w3-button">Edit Profile</a>
         </li>
         <li>
            <a href="{% url 'Login_App:em_profile' %}" class="w3-bar-item w3-button">Profile</a>
         </li>
+        <li>
+           <a href="{% url 'Login_App:employee_edit' %}" class="w3-bar-item w3-button">Edit Profile</a>
+        </li>
+        <li>
+           <a href="{% url 'Payment_App:orders' %}" class="w3-bar-item w3-button">Orders</a>
+        </li>
+
         <li>
               <a class="w3-bar-item w3-button" href="{% url 'Login_App:logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
 

@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
-{% block title_block %} Profile_details {% endblock %}
 {% block body_block %}
 
-<div class="w3-sidebar  w3-bar-block" style="width:25%; padding: 10px; overflow: hidden; background-color: #96cbeb;">
+<div class="w3-sidebar  w3-bar-block" style="width:25%;padding: 10px; overflow: hidden; background-color: #96cbeb;">
     <div class="row">
         <div class="col-3">
             {% if user.employee_profile.profile_pic %}
@@ -41,54 +40,38 @@
 
 <!-- Page Content -->
 <div style="margin-left:25%">
-    <div class="w3-container">
-        <h3 class ="alert alert-light border rounded mt-4 mb-4 rounded " align="center" ><b>About Me</b></h3>
-        <table class="table table-hover border rounded">
+<div class="w3-container">
+<div class="container mt-5">
+  <h2 class="text-center"><strong>My record</strong></h2>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card mt-5" style="height:auto">
+        <div class="table-responsive">
+          <table class="table">
             <thead>
               <tr>
-                <th scope="col">Context</th>
-                <th scope="col">Description</th>
+                <th scope="col">#</th>
+                <th scope="col">Order Id</th>
+                <th scope="col">Products</th>
               </tr>
             </thead>
-          <tbody>
-          <tr>
-            <td>Username</td>
-              <td>{{ user}}</td>
-          </tr>
-          <tr>
-            <td>Full Name</td>
-              <td>{{ profile.full_name }}</td>
-          </tr>
-          <tr>
-            <td>Address</td>
-              <td>{{ profile.address_1 }}</td>
-          </tr>
-          <tr>
-            <td>City</td>
-              <td>{{ profile.city }}</td>
-          </tr>
-          <tr>
-            <td>Zipcode</td>
-              <td>{{ profile.zipcode }}</td>
-          </tr>
-          <tr>
-            <td>Country</td>
-              <td>{{ profile.country }}</td>
-          </tr>
-          <tr>
-            <td>Phone</td>
-              <td>{{ profile.phone }}</td>
-          </tr>
-          <tr>
-            <td>Joined Date</td>
-              <td>{{ profile.date_joined }}</td>
-          </tr>
-          </tbody>
+            <tbody>
+              {% for order in orders %}
+              <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td><a href="#">{{ order.orderId }}</a></td>
+                <td>
+                  {% for product in order.orderproduct.all %} {{product}} <br> {% endfor %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
           </table>
+        </div>
+      </div>
     </div>
-
+  </div>
 </div>
-
-<br>
-<br>
+</div>
+</div>
 {% endblock %}

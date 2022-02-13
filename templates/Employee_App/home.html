@@ -1,8 +1,48 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block body_block %}
-<br><br><br>
+
+<div class="w3-sidebar  w3-bar-block" style="width:25%;padding: 10px; overflow: hidden; background-color: #96cbeb;">
+    <div class="row">
+        <div class="col-3">
+            {% if user.employee_profile.profile_pic %}
+            <img src="/media/{{user.employee_profile.profile_pic}}" width="100px" height="100px" class="rounded-circle">
+            {% else %}
+            <img src="/media/default.jpg" width="100px" height="100px" class="rounded-circle">
+            {% endif %}
+        </div>
+        <div class="col-6">
+            <h4>&nbsp; &nbsp;&nbsp;{{user.username}} </h4>
+            <h3>&nbsp; &nbsp;&nbsp;{{user.admin_profile.full_name}}</h3>
+        </div>
+    </div>
+    <hr style="border-top: 1px solid #0d1215;">
+    <p>{{user.admin_profile.description|linebreaks}}</p>
+    <ul style="list-style-type: none; margin: 0; padding: 0;">
+         <li>
+           <a href="{% url 'Home_App:em_home' %}" class="w3-bar-item w3-button">Home</a>
+        </li>
+        <li>
+           <a href="{% url 'Login_App:em_profile' %}" class="w3-bar-item w3-button">Profile</a>
+        </li>
+        <li>
+           <a href="{% url 'Login_App:employee_edit' %}" class="w3-bar-item w3-button">Edit Profile</a>
+        </li>
+        <li>
+           <a href="{% url 'Payment_App:orders' %}" class="w3-bar-item w3-button">Orders</a>
+        </li>
+
+        <li>
+              <a class="w3-bar-item w3-button" href="{% url 'Login_App:logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
+
+        </li>
+    </ul>
+    </div>
+
+
+
 <!-- Page Content -->
+<div style="margin-left:25%">
 <div class="w3-container">
     <div class="card" style="height:auto">
         <h3 style="text-align: center;"><b>Products List</b></h3>
@@ -29,5 +69,6 @@
           </table>
         </div>
     </div>
+</div>
 </div>
 {%endblock%}

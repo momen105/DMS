@@ -154,7 +154,9 @@ def employee_login(request):
 
 @login_required
 def employee_profile(request):
-    return render(request, 'Employee_App/profile.html', context={'title':'Employee'})
+    profile = EmployeeProfile.objects.get(user=request.user)
+
+    return render(request, 'Employee_App/profile.html', context={'profile':profile})
 @login_required
 def employee_prf_edit(request):
     current_user = EmployeeProfile.objects.get(user=request.user)
