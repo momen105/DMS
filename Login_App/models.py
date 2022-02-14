@@ -11,7 +11,7 @@ class AdminProfile(models.Model):
     dob = models.DateField(blank=True, null=True)
     website = models.URLField(blank=True)
     facebook = models.URLField(blank=True)
-    nid_number = models.CharField(max_length=40, blank=True)
+    full_name = models.CharField(max_length=40, blank=True)
     address_1 = models.TextField(max_length=300, blank=True)
     city = models.CharField(max_length=40, blank=True)
     zipcode = models.CharField(max_length=10, blank=True)

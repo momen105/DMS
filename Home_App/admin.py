@@ -1,3 +1,5 @@
-from django.contrib import admin
 
-# Register your models here.
+from django.contrib import admin
+from Home_App.models import BreakingNews
+#Register your models here.
+admin.site.register(BreakingNews)

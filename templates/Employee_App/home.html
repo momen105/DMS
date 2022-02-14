@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block body_block %}
+{% load cart_tag %}
 
 <div class="w3-sidebar  w3-bar-block" style="width:25%;padding: 10px; overflow: hidden; background-color: #96cbeb;">
     <div class="row">
@@ -28,6 +29,12 @@
         <li>
            <a href="{% url 'Login_App:employee_edit' %}" class="w3-bar-item w3-button">Edit Profile</a>
         </li>
+        <li class="nav-item">
+          <a href="{% url 'Employee_App:cart' %}" class="nav-link">
+               Confirm Product
+              <span class="badge badge-light">{{ request.user | cart_total }}</span>
+          </a>
+        </li>
         <li>
            <a href="{% url 'Payment_App:orders' %}" class="w3-bar-item w3-button">Orders</a>
         </li>
@@ -44,13 +51,28 @@
 <!-- Page Content -->
 <div style="margin-left:25%">
 <div class="w3-container">
+    {% for news in news %}
+        <div class="ticker " style="display:flex;flex-wrap:warp; width:100%; height:50px;">
+            <div class="title" style="width:25%; text-align:center;background:#c81c1c;">
+                <h3>Breaking News</h3>
+            </div>
+            <div class="news" style="width:80%; background:#cc4444; padding: 13px;">
+                <marquee>
+                    <p>
+                        {{news.text}}
+                    </p>
+
+                </marquee>
+            </div>
+        </div>
+        <br>
+        {% endfor %}
     <div class="card" style="height:auto">
         <h3 style="text-align: center;"><b>Products List</b></h3>
         <div class="card-body">
           <table class="table table-hover">
             <thead>
               <tr>
-                <th scope="col">seller Name</th>
                 <th scope="col">descriptions</th>
                   <th scope="col">upload_date</th>
                   <th scope="col">Action</th>
@@ -59,7 +81,6 @@
           <tbody>
           {% for product in product_post %}
           <tr>
-            <td>{{product.seller.seller_profile.full_name}}</td>
               <td>{{product.descriptions}}</td>
               <td>{{product.upload_date}}</td>
               <td><a href="{% url 'Employee_App:confirm' id=product.id %}">Confirm</a></td>

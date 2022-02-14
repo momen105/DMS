@@ -1,107 +1,125 @@
-
-{% extends 'Seller_App/seller_nav.html' %}
+{% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {%block body_block%}
-<br><br><br>
-<!-- Sidebar -->
-<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%;padding: 10px;">
+<div class="w3-sidebar  w3-bar-block" style="width:25%;padding: 10px; overflow: hidden; background-color: #96cbeb;">
     <div>
         {% if user.seller_profile.profile_pic %}
-    <img src="/media/{{user.seller_profile.profile_pic}}" width="160px" height="160px" class="rounded-circle">
-    {% else %}
-    <img src="/media/default.jpg" width="160px" height="160px" class="rounded-circle">
-    {% endif %}
+        <img src="/media/{{user.seller_profile.profile_pic}}" width="100px" height="100px" class="rounded-circle">
+        {% else %}
+        <img src="/media/default.jpg" width="100px" height="100px" class="rounded-circle">
+        {% endif %}
+        <h1>{{user.username}} &nbsp;
+        </h1>
+        <h4>{{user.product.count}} Products posts</h4>
 
-        <h1>{{user.username}} &nbsp; <a href="{% url 'Login_App:seller_edit' %}" class="btn btn-light">Edit Profile</a></h1>
-    <h4>{{user.product.count}} Products posts</h4>
-
+    </div>
+    <hr style="border-top: 1px solid #0d1215;">
     <h3>{{user.seller_profile.full_name}}</h3>
-    <p>{{user.seller_profile.description|linebreaks}}</p>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-  New Post
-</button>
-    </div>
 
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+        New Post
+    </button>
+    <ul style="list-style-type: none; margin: 0; padding: 0;">
+        <li>
+            <a href="{% url 'Home_App:se_home' %}" class="w3-bar-item w3-button">Home</a>
+        </li>
+        <li>
+            <a href="{% url 'Login_App:se_profile' %}" class="w3-bar-item w3-button">Profile</a>
+        </li>
+        <li>
+            <a href="{% url 'Login_App:seller_edit' %}" class="w3-bar-item w3-button">Edit Profile</a>
+        </li>
 
-    </div>
+        <li>
+            <a href="{% url 'Seller_App:product_details' %}" class="w3-bar-item w3-button">Products List</a>
+        </li>
 
+        <li>
+            <a class="w3-bar-item w3-button" href="{% url 'Login_App:logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
 
+        </li>
+    </ul>
+</div>
 
 <!-- Page Content -->
-<div style="margin-left:30%">
+<div style="margin-left:25%">
+    <div class="w3-container">
 
-<div class="w3-container">
-    {% for product in user.product.all %}
-            <div class="border rounded " style="background-color: #ffffff;">
-                <div style="margin-left: 10px;">
-                    {% if post.seller.seller_profile.profile_pics %}
-                    <img src="/media/{{product.seller.user_profile.profile_pics}}" width="40px" height="40px"
-                         style="margin-top: 15px;" class="rounded-circle">
-                    {% else %}
-                    <img src="/media/default.jpg" width="40px" height="40px" class="rounded-circle">
-                    {% endif %}
-                    <a>&nbsp;{{product.seller.seller_profile.full_name}}</a>
-                    <a>&nbsp;&nbsp;<i class="fas fa-clock" style="color:#82B6D9;"></i>&nbsp;{{product.upload_date}}</a>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-6 " style="margin: 10px;">
-                   <p> <b>Descriptions :</b> {{product.descriptions}}</p>
-                        <hr>
-                       <p><b>Address :</b> {{product.address}}</p>
-                       <p><b>Price :</b> {{product.price}}</p>
-
-                </div>
-                <div>
-                    <img class="crop mx-auto d-block" src="/media/{{product.image}}">
-                </div>
-            </div>
-
-            </div>
-            <hr>
-            {% endfor %}
-
-    {% for user in user.full_name.all %}
-     {{user.full_name}}
-    {% endfor %}
-
+        <h3 class ="alert alert-light border rounded mt-4 mb-4 rounded " align="center" ><b>About Me</b></h3>
+        <table class="table table-hover border rounded">
+            <thead>
+              <tr>
+                <th scope="col">Context</th>
+                <th scope="col">Description</th>
+              </tr>
+            </thead>
+          <tbody>
+          <tr>
+            <td>Username</td>
+              <td>{{ user}}</td>
+          </tr>
+          <tr>
+            <td>Full Name</td>
+              <td>{{ profile.full_name }}</td>
+          </tr>
+          <tr>
+            <td>Address</td>
+              <td>{{ profile.address_1 }}</td>
+          </tr>
+          <tr>
+            <td>City</td>
+              <td>{{ profile.city }}</td>
+          </tr>
+          <tr>
+            <td>Zipcode</td>
+              <td>{{ profile.zipcode }}</td>
+          </tr>
+          <tr>
+            <td>Country</td>
+              <td>{{ profile.country }}</td>
+          </tr>
+          <tr>
+            <td>Phone</td>
+              <td>{{ profile.phone }}</td>
+          </tr>
+          <tr>
+            <td>Joined Date</td>
+              <td>{{ profile.date_joined }}</td>
+          </tr>
+          </tbody>
+          </table>
+    </div>
 </div>
-</div>
-<!-- The Modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-  New Post
-</button>
-
 <!-- The Modal -->
 <div class="modal" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-dialog">
+        <div class="modal-content">
 
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Post a Product</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Post a Product</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
 
-      <!-- Modal body -->
-      <div class="modal-body">
-        <form method="POST" enctype="multipart/form-data">
-          {{form.as_p}}
-          {% csrf_token %}
-          <button type="submit">Post</button>
-        </form>
-      </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form method="POST" enctype="multipart/form-data">
+                    {{form.as_p}}
+                    {% csrf_token %}
+                    <button type="submit">Post</button>
+                </form>
+            </div>
 
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-      </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
 
+        </div>
     </div>
-  </div>
 </div>
 <br>
-<br>
+
 
 
 {%endblock%}

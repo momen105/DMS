@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{%block body_block%}
+<div class="w3-sidebar  w3-bar-block" style="width:25%;padding: 10px; overflow: hidden; background-color: #96cbeb;">
+    <div>
+        {% if user.seller_profile.profile_pic %}
+        <img src="/media/{{user.seller_profile.profile_pic}}" width="100px" height="100px" class="rounded-circle">
+        {% else %}
+        <img src="/media/default.jpg" width="100px" height="100px" class="rounded-circle">
+        {% endif %}
+        <h1>{{user.username}} &nbsp;
+        </h1>
+        <h4>{{user.product.count}} Products posts</h4>
+
+    </div>
+    <hr style="border-top: 1px solid #0d1215;">
+    <h3>{{user.seller_profile.full_name}}</h3>
+    <ul style="list-style-type: none; margin: 0; padding: 0;">
+        <li>
+            <a href="{% url 'Home_App:se_home' %}" class="w3-bar-item w3-button">Home</a>
+        </li>
+        <li>
+            <a href="{% url 'Login_App:se_profile' %}" class="w3-bar-item w3-button">Profile</a>
+        </li>
+        <li>
+            <a href="{% url 'Login_App:seller_edit' %}" class="w3-bar-item w3-button">Edit Profile</a>
+        </li>
+
+        <li>
+            <a href="{% url 'Seller_App:product_details' %}" class="w3-bar-item w3-button">Products List</a>
+        </li>
+
+        <li>
+            <a class="w3-bar-item w3-button" href="{% url 'Login_App:logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
+
+        </li>
+    </ul>
+</div>
+
+<!-- Page Content -->
+<div style="margin-left:25%">
+    <div class="w3-container">
+        <br>
+        <div class="card rounded" style="height:auto">
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">descriptions</th>
+                        <th scope="col">upload_date</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for product in user.product.all %}
+                    <tr>
+                        <td>{{product.descriptions}}</td>
+                        <td>{{product.upload_date}}</td>
+                        <td>
+                            {% if product.public == True %}
+                            <a href="#" class="btn btn-success">Approve</a>
+                            {% elif product.private == True %}
+                            <a href="#" class="btn btn-danger">Rejected</a>
+                            {% else %}
+                            <a href="#" class="btn btn-secondary">Pending</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+{%endblock%}

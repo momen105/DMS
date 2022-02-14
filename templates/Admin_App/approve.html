@@ -19,78 +19,91 @@
     <p>{{user.admin_profile.description|linebreaks}}</p>
     <ul style="list-style-type: none; margin: 0; padding: 0;">
         <li>
-           <a href="{% url 'Login_App:ad_profile' %}" class="w3-bar-item w3-button">Dashboard</a>
+            <a href="{% url 'Login_App:ad_profile' %}" class="w3-bar-item w3-button">Dashboard</a>
         </li>
 
         <li>
-           <a href="{% url 'Home_App:ad_home' %}" class="w3-bar-item w3-button">Home</a>
+            <a href="{% url 'Home_App:ad_home' %}" class="w3-bar-item w3-button">Home</a>
         </li>
         <li>
-           <a href="{% url 'Login_App:admin_edit' %}" class="w3-bar-item w3-button">Edit Profile</a>
+            <a href="{% url 'Login_App:admin_edit' %}" class="w3-bar-item w3-button">Edit Profile</a>
         </li>
 
         <li>
-           <a href="{% url 'Admin_App:user_list' %}" class="w3-bar-item w3-button">Users List</a>
+            <a href="{% url 'Admin_App:user_list' %}" class="w3-bar-item w3-button">Users List</a>
         </li>
 
-        <li >
+        <li>
             <a href="{% url 'Admin_App:product_list' %}" class="w3-bar-item w3-button">Products List</a>
         </li>
 
         <li>
-              <a class="w3-bar-item w3-button" href="{% url 'Login_App:logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
+            <a class="w3-bar-item w3-button" href="{% url 'Login_App:logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
 
         </li>
     </ul>
-    </div>
+</div>
 </div>
 
 
 <div style="margin-left:25%">
-<div class="w3-container">
-    <br>
-    <div class="card" style="height:auto">
-        <h3 style="text-align: center;"><b>Products</b></h3>
-        <div class="card-body">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th scope="col">seller Name</th>
-                <th scope="col">descriptions</th>
-                  <th scope="col">upload_date</th>
-              </tr>
-            </thead>
-          <tbody>
-          <tr>
-            <td>{{product.seller.seller_profile.full_name}}</td>
-              <td>{{product.descriptions}}</td>
-              <td>{{product.upload_date}}</td>
-             <!-- <td><a href="{% url 'Admin_App:app' id=product.id %}" class="btn btn-danger">Approve</a></td> -->
-          </tr>
+    <div class="w3-container">
+        <br>
+        <div class="card" style="height:auto">
+            <h3 style="text-align: center;"><b>Products</b></h3>
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">seller Name</th>
+                        <th scope="col">descriptions</th>
+                        <th scope="col">upload_date</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{product.seller.seller_profile.full_name}}</td>
+                        <td>{{product.descriptions}}</td>
+                        <td>{{product.upload_date}}</td>
+                        <td>{% if product.public == True %}
+                        <a href="{% url 'Admin_App:app' id=product.id %}" class="btn btn-success">Approve</a>
+                        {% elif product.private == True %}
+                        <a href="{% url 'Admin_App:rjt' id=product.id %}" class="btn btn-danger">Rejected</a>
+                        {% else %}
+                        <a href="{% url 'Admin_App:app' id=product.id %}" class="btn btn-success">Approve</a>
+                        <a href="#" class="btn btn-danger">Rejected</a>
 
-          </tbody>
-          </table>
-            <hr>
-            <div>
-                <h2>Generate secret Code</h2>
-                <form action="{% url 'Admin_App:generate_code' id=product.id %}">
-                   <select name="length">
-                       <option value="6">6</option>
-                       <option value="8">8</option>
-                       <option value="10">10</option>
-                   </select> length <br><br>
-                    <label> <input type="checkbox" name="uppercase">UPPERCASE</label><br>
-                    <label> <input type="checkbox" name="numbers">Number</label><br>
-                    <label> <input type="checkbox" name="symbols">Symbols</label><br>
-                    <input type="submit" value="Generate" class="btn btn-primary">
-                </form>
+                        {% endif %}</td>
+                    </tr>
+                    </tbody>
+                </table>
                 <hr>
-
+                {% if product.public == True %}
+                <div>
+                    <h2>Generate secret Code</h2>
+                    <form action="{% url 'Admin_App:generate_code' id=product.id %}">
+                        <select name="length">
+                            <option value="6">6</option>
+                            <option value="8">8</option>
+                            <option value="10">10</option>
+                        </select> length <br><br>
+                        <label> <input type="checkbox" name="uppercase">UPPERCASE</label><br>
+                        <label> <input type="checkbox" name="numbers">Number</label><br>
+                        <label> <input type="checkbox" name="symbols">Symbols</label><br>
+                        <input type="submit" value="Generate" class="btn btn-primary">
+                    </form>
+                    <hr>
+                </div>
+                {% elif product.private == True %}
+                <h3>Product is Rejected</h3>
+                {% else %}
+                <h3>Please do the rejected or approve </h3>
+                {% endif %}
 
             </div>
         </div>
     </div>
-</div>
 </div>
 
 {%endblock%}

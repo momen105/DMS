@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 #from App_Posts.forms import PostForm
 from Seller_App.forms import ProductsForm
 from Seller_App.models import Products
+from Home_App.forms import NewsForm
+from Home_App.models import BreakingNews
 
 # Create your views here.
 def admin_signup(request):
@@ -48,7 +50,19 @@ def admin_profile(request):
     user = User.objects.all()
     user_count = user.count()
     product_active = Products.objects.filter(public=True)
+    active_count = product_active.count()
+    product_rjt = Products.objects.filter(private= True)
+    rjt_count =product_rjt.count()
     active = product_active.count()
+    news = BreakingNews.objects.filter(public=True)
+    form = NewsForm()
+    if request.method == 'POST':
+        form = NewsForm(request.POST, request.FILES)
+        if form.is_valid():
+            news = form.save(commit=False)
+            news.user = request.user
+            news.save()
+            return HttpResponseRedirect(reverse('Admin_App:ad_profile'))
     context = {'title': 'Admin',
                'seller_count': seller_count,
                'Seller': seller,
@@ -56,7 +70,11 @@ def admin_profile(request):
                'product_count': product_count,
                'user_count': user_count,
                'product': product,
-               'active':active,}
+               'active':active,
+               'form':form,
+               'news':news,
+               'active_count':active_count,
+               'rjt_count':rjt_count}
 
 
     return render(request, 'Admin_App/profile.html',context)
@@ -99,8 +117,10 @@ def seller_login(request):
                 login(request, seller)
                 return HttpResponseRedirect(reverse('Login_App:se_profile'))
     return render(request, 'Seller_App/login.html', context={'title':'Login','form':form})
+
 @login_required
 def seller_profile(request):
+    profile = SellerProfile.objects.get(user=request.user)
     form = ProductsForm()
     if request.method == 'POST':
         form = ProductsForm(request.POST, request.FILES)
@@ -108,11 +128,11 @@ def seller_profile(request):
             product = form.save(commit=False)
             product.seller = request.user
             product.save()
-            return HttpResponseRedirect(reverse('Login_App:se_profile'))
-    return render(request, 'Seller_App/profile.html', context={'title':'Seller','form':form})
+            return HttpResponseRedirect(reverse('Home_App:se_home'))
+    return render(request, 'Seller_App/profile.html', context={'title':'Seller','form':form,'profile':profile})
+
 @login_required
 def seller_prf_edit(request):
-
     current_user = SellerProfile.objects.get(user=request.user)
     form = EditSellerProfile(instance=current_user)
     if request.method == 'POST':
@@ -149,13 +169,12 @@ def employee_login(request):
             employee = authenticate(username=username, password=password)
             if employee is not None:
                 login(request, employee)
-                return HttpResponseRedirect(reverse('Employee_App:em_dashboard'))
+                return HttpResponseRedirect(reverse('Login_App:em_profile'))
     return render(request, 'Employee_App/login.html', context={'title':'Login','form':form})
 
 @login_required
 def employee_profile(request):
     profile = EmployeeProfile.objects.get(user=request.user)
-
     return render(request, 'Employee_App/profile.html', context={'profile':profile})
 @login_required
 def employee_prf_edit(request):

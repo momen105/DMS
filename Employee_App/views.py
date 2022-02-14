@@ -30,17 +30,15 @@ def confirm(request, id):
         if order.orderproduct.filter(product=product).exists():
             order_product[0].quantity += 1
             order_product[0].save()
-            return render(request, 'Employee_App/cart.html', context={'product':product, 'order_product':order_product,'order_qs':order_qs})
+            return redirect("Home_App:em_home")
         else:
             order.orderproduct.add(order_product[0])
-            return render(request, 'Employee_App/cart.html', context={'product':product, 'order_product':order_product,'order_qs':order_qs})
-
+            return redirect("Home_App:em_home")
     else:
         order = Order(user=request.user)
         order.save()
         order.orderproduct.add(order_product[0])
-        return render(request, 'Employee_App/cart.html', context={'product':product, 'order_product':order_product,'order_qs':order_qs})
-
+        return redirect("Home_App:em_home")
 
 @login_required
 def cart_view(request):

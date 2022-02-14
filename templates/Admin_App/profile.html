@@ -21,108 +21,121 @@
     <p>{{user.admin_profile.description|linebreaks}}</p>
     <ul style="list-style-type: none; margin: 0; padding: 0;">
         <li>
-           <a href="{% url 'Login_App:ad_profile' %}" class="w3-bar-item w3-button">Dashboard</a>
+            <a href="{% url 'Login_App:ad_profile' %}" class="w3-bar-item w3-button">Dashboard</a>
         </li>
 
         <li>
-           <a href="{% url 'Home_App:ad_home' %}" class="w3-bar-item w3-button">Home</a>
+            <a href="{% url 'Home_App:ad_home' %}" class="w3-bar-item w3-button">Home</a>
         </li>
         <li>
-           <a href="{% url 'Login_App:admin_edit' %}" class="w3-bar-item w3-button">Edit Profile</a>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                Breaking News
+            </button>
+        </li>
+        <li>
+            <a href="{% url 'Admin_App:allnews' %}" class="w3-bar-item w3-button">All News</a>
         </li>
 
         <li>
-           <a href="{% url 'Admin_App:user_list' %}" class="w3-bar-item w3-button">Users List</a>
+            <a href="{% url 'Login_App:admin_edit' %}" class="w3-bar-item w3-button">Edit Profile</a>
         </li>
 
-        <li >
+        <li>
+            <a href="{% url 'Admin_App:user_list' %}" class="w3-bar-item w3-button">Users List</a>
+        </li>
+
+        <li>
             <a href="{% url 'Admin_App:product_list' %}" class="w3-bar-item w3-button">Products List</a>
         </li>
 
+
         <li>
-              <a class="w3-bar-item w3-button" href="{% url 'Login_App:logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
+            <a class="w3-bar-item w3-button" href="{% url 'Login_App:logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
 
         </li>
+
     </ul>
-    </div>
+</div>
 
 <!-- Page Content -->
 <div style="margin-left:25%">
-<div class="w3-container">
-    <br>
-    <div class="row">
-        <div class="col-2">
-            <div class="card text-center" style="width: 10rem; background-color: #38aa89;">
-                <h4 style="">Total Product</h4>
-               <i class="fa-solid fa-user"></i>
-                <hr>
-              <div class="card-body">
-                85
-              </div>
+    <div class="w3-container">
+        <br>
+        <div class="row">
+            <div class="col-2">
+                <div class="card text-center" style="width: 10rem; background-color: #38aa89;">
+                    <h4 style="">Total Product</h4>
+                    <i class="fa-solid fa-user"></i>
+                    <hr>
+                    <div class="card-body">
+                        {{product_count}}
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-2">
-           <div class="card text-center" style="width: 8rem; background-color: #82b6d9;">
-                <h4>Total User</h4>
-               <i class="fa-solid fa-users"></i>
-               <hr>
-              <div class="card-body">
-                {{user_count}}
-              </div>
-            </div>
+            <div class="col-2">
+                <div class="card text-center" style="width: 8rem; background-color: #82b6d9;">
+                    <h4>Total User</h4>
+                    <i class="fa-solid fa-users"></i>
+                    <hr>
+                    <div class="card-body">
+                        {{user_count}}
+                    </div>
+                </div>
 
-        </div>
-        <div class="col-2">
-           <div class="card text-center" style="width: 8rem; background-color: #008000;">
-                <h4>Total Seller</h4>
-               <i class="fa-solid fa-users"></i>
-               <hr>
-              <div class="card-body">
-                {{seller_count}}
-              </div>
+            </div>
+            <div class="col-2">
+                <div class="card text-center" style="width: 8rem; background-color: #008000;">
+                    <h4>Total Seller</h4>
+                    <i class="fa-solid fa-users"></i>
+                    <hr>
+                    <div class="card-body">
+                        {{seller_count}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="card text-center" style="width: 10rem; background-color: #82b6d9;">
+                    <h4>Total Employee</h4>
+                    <i class="fa-solid fa-users"></i>
+                    <hr>
+                    <div class="card-body">
+                        {{employee_count}}
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-2">
-           <div class="card text-center" style="width: 10rem; background-color: #82b6d9;">
-                <h4>Total Employee</h4>
-                <i class="fa-solid fa-users"></i>
-               <hr>
-              <div class="card-body">
-                {{employee_count}}
-              </div>
+        <br>
+        {% for news in news %}
+        <div class="ticker " style="display:flex;flex-wrap:warp; width:100%; height:50px;">
+            <div class="title" style="width:25%; text-align:center;background:#c81c1c;">
+                <h3>Breaking News</h3>
+            </div>
+            <div class="news" style="width:80%; background:#cc4444; padding: 13px;">
+                <marquee>
+                    <p>
+                        {{news.text}}
+                    </p>
+
+                </marquee>
             </div>
         </div>
-    </div>
-    <br>
-    <div class="ticker " style="display:flex;flex-wrap:warp; width:100%; height:50px;">
-        <div class="title" style="width:25%; text-align:center;background:#c81c1c;">
-            <h3>Breaking News</h3>
-        </div>
-        <div class="news" style="width:80%; background:#cc4444; padding: 13px;">
-            <marquee>
-                <p>
-                    In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.
-                </p>
-            </marquee>
-
-        </div>
-
-    </div>
-  <!----------------------Graphs----------------->
-    <div class="container">
-        <div class="row my-5">
-            <div class="col-md-6">
-                <div class="bg-white">
-                    <canvas id="myChart1" width="400" height="300"></canvas>
-                    <script>
+        <br>
+        {% endfor %}
+        <!----------------------Graphs----------------->
+        <div class="container">
+            <div class="row my-5">
+                <div class="col-md-6">
+                    <div class="bg-white">
+                        <canvas id="myChart1" width="400" height="300"></canvas>
+                        <script>
                         var ctx = document.getElementById('myChart1').getContext('2d');
                         var myChart1 = new Chart(ctx, {
                             type: 'pie',
                             data: {
-                                labels: ['Electrical','Grocery','garments','Stationery'],
+                                labels: ['User','Seller','Employee'],
                                 datasets: [{
-                                    label: 'Products Type',
-                                    data: [50,5,20,10],
+                                    label: 'Total User',
+                                    data: [{{product_count}},{{seller_count}},{{employee_count}}],
                                     backgroundColor: [
                                         'rgba(255, 99, 132, 1)',
                                         'rgba(54, 162, 235, 1)',
@@ -152,21 +165,22 @@
                                 }
                             }
                         });
-                    </script>
+
+                        </script>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="bg-white">
-                    <canvas id="myChart" width="400" height="300"></canvas>
-                    <script>
+                <div class="col-md-6">
+                    <div class="bg-white">
+                        <canvas id="myChart" width="400" height="300"></canvas>
+                        <script>
                         var ctx = document.getElementById('myChart').getContext('2d');
                         var myChart = new Chart(ctx, {
                             type: 'bar',
                             data: {
-                                labels: ['Active','rejected','Processing'],
+                                labels: ['Active','rejected','Approve'],
                                 datasets: [{
                                     label: 'Products Details',
-                                    data: [10,4,6],
+                                    data: [{{product_count}},{{rjt_count}},{{active_count}}],
                                     backgroundColor: [
                                         'rgba(255, 99, 132, 1)',
                                         'rgba(54, 162, 235, 1)',
@@ -196,14 +210,42 @@
                                 }
                             }
                         });
-                    </script>
+
+                        </script>
+                    </div>
                 </div>
             </div>
         </div>
+        <!--End Graphs-->
     </div>
-    <!--End Graphs-->
-
-</div>
 </div>
 
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Breaking News</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form method="POST" enctype="multipart/form-data">
+                    {{form.as_p}}
+                    {% csrf_token %}
+                    <button type="submit">Post</button>
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
 {%endblock%}

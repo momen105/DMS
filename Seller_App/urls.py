@@ -5,6 +5,7 @@ from django.urls import path
 app_name = 'Seller_App'
 
 urlpatterns = [
-    #path('', views.seller, name='seller_home'),
+    path('product_details/', views.product_details, name='product_details'),
+
 
 ]
