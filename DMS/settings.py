@@ -1,5 +1,8 @@
 import os
 from pathlib import Path
+import django_heroku
+import dj_database_url
+from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 #TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
@@ -45,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'DMS.urls'
@@ -115,7 +119,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIR = [STATIC_DIR,]
 
-# STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # Media files
 
 MEDIA_ROOT = MEDIA_DIR
@@ -135,3 +140,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_PASSWORD = "admin@@@"
 EMAIL_USE_SSL = False
+
+django_heroku.settings(locals())
