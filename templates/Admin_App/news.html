@@ -73,18 +73,15 @@
                         {% if news.public == True %}
                         <a href="#" class="btn btn-success">Public</a>
                         {% elif news.hide == True %}
-                        <a href="#" class="btn btn-success">hide</a>
+                        <a href="{% url 'Admin_App:detail' id=news.id %}" class="btn btn-success">View details</a>
                         {% else %}
                         <a href="{% url 'Admin_App:detail' id=news.id %}" class="btn btn-success">View details</a>
                         {% endif %}
                     </td>
-
-
                 </tr>
                 {% endfor %}
                 </tbody>
             </table>
-
         </div>
     </div>
 </div>

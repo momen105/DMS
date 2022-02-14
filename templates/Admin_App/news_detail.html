@@ -70,9 +70,9 @@
                     <td>{{news.text}}</td>
                     <td>
                         {% if news.public == True %}
-                        <a href="{% url 'Admin_App:public' id=news.id %}" class="btn btn-success">Public</a>
-                        {% elif news.hide == True %}
                         <a href="{% url 'Admin_App:hide' id=news.id %}" class="btn btn-success">hide</a>
+                        {% elif news.hide == True %}
+                        <a href="{% url 'Admin_App:public' id=news.id %}" class="btn btn-success">Public</a>
                         {% else %}
                         <a href="{% url 'Admin_App:hide' id=news.id %}" class="btn btn-success">hide</a>
                         <a href="{% url 'Admin_App:public' id=news.id %}" class="btn btn-success">Public</a>

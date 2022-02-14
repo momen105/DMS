@@ -55,9 +55,9 @@
           <table class="table table-hover">
             <thead>
               <tr>
-                <th scope="col">seller Name</th>
-                <th scope="col">descriptions</th>
-                  <th scope="col">upload_date</th>
+                <th scope="col">Seller Name</th>
+                <th scope="col">Address</th>
+                  <th scope="col">Upload_date</th>
                   <th scope="col">Actions</th>
               </tr>
             </thead>
@@ -65,15 +65,15 @@
           {% for product in product_list %}
           <tr>
             <td>{{product.seller.seller_profile.full_name}}</td>
-              <td>{{product.descriptions}}</td>
+              <td>{{product.address}}</td>
               <td>{{product.upload_date}}</td>
 
              <!-- <td><a href="{% url 'Admin_App:app' id=product.id %}" class="btn btn-danger">Approve</a></td> -->
               <td>
                   {% if product.public == True %}
-                          <a href="#" class="btn btn-success">Approve</a>
+                  <a href="#" class="btn btn-success">Approve</a>
                   {% elif product.private == True %}
-                       <a href="#" class="btn btn-danger">Rejected</a>
+                  <a href="#" class="btn btn-danger">Rejected</a>
                   {% else %}
                   <a href="{% url 'Admin_App:product_details' id=product.id %}" class="btn btn-secondary">View details</a>
 

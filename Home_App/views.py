@@ -34,7 +34,8 @@ class SellerHome(View):
 class EmplyoeeHome(View):
     def get(self, request):
         user = request.user
-        product_post = Products.objects.filter(public=True)
+        product_post = Products.objects.filter(public=True, private=False)
+
         seller_list = SellerProfile.objects.all()
         news = BreakingNews.objects.filter(public=True)
 

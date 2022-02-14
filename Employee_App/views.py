@@ -23,21 +23,29 @@ def confirm(request, id):
     product = get_object_or_404(Products, id=id)
     order_product = Cart.objects.get_or_create(product=product, user=request.user, taken=False)
     order_qs = Order.objects.filter(user=request.user, ordered=False)
-
     #print(order_qs[0])
     if order_qs.exists():
         order = order_qs[0]
         if order.orderproduct.filter(product=product).exists():
             order_product[0].quantity += 1
             order_product[0].save()
+            product.confirm = True
+            product.private = True
+            product.save()
             return redirect("Home_App:em_home")
         else:
             order.orderproduct.add(order_product[0])
+            product.confirm = True
+            product.private = True
+            product.save()
             return redirect("Home_App:em_home")
     else:
         order = Order(user=request.user)
         order.save()
         order.orderproduct.add(order_product[0])
+        product.confirm = True
+        product.private = True
+        product.save()
         return redirect("Home_App:em_home")
 
 @login_required
@@ -49,3 +57,7 @@ def cart_view(request):
         return render(request, 'Employee_App/cart_view.html', context={'carts':carts, 'order':order})
     else:
         return redirect("Home_App:em_home")
+
+def view_product(request,id):
+    product = Products.objects.get(id=id, public=True)
+    return render(request, 'Employee_App/confirm.html', context={'product': product})

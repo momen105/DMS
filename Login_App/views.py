@@ -62,7 +62,7 @@ def admin_profile(request):
             news = form.save(commit=False)
             news.user = request.user
             news.save()
-            return HttpResponseRedirect(reverse('Admin_App:ad_profile'))
+            return HttpResponseRedirect(reverse('Login_App:ad_profile'))
     context = {'title': 'Admin',
                'seller_count': seller_count,
                'Seller': seller,

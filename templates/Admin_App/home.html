@@ -54,7 +54,7 @@
             <thead>
               <tr>
                 <th scope="col">seller Name</th>
-                <th scope="col">descriptions</th>
+                <th scope="col">Address</th>
                   <th scope="col">upload_date</th>
 
               </tr>
@@ -63,7 +63,7 @@
           {% for product in product_post %}
           <tr>
             <td>{{product.seller.seller_profile.full_name}}</td>
-              <td>{{product.descriptions}}</td>
+              <td>{{product.address}}</td>
               <td>{{product.upload_date}}</td>
           </tr>
           {% endfor %}

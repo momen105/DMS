@@ -72,8 +72,7 @@
                         <a href="{% url 'Admin_App:rjt' id=product.id %}" class="btn btn-danger">Rejected</a>
                         {% else %}
                         <a href="{% url 'Admin_App:app' id=product.id %}" class="btn btn-success">Approve</a>
-                        <a href="#" class="btn btn-danger">Rejected</a>
-
+                        <a href="{% url 'Admin_App:rjt' id=product.id %}" class="btn btn-danger">Rejected</a>
                         {% endif %}</td>
                     </tr>
                     </tbody>

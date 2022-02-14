@@ -115,7 +115,7 @@ def public(request, id):
 
 def hide(request, id):
     news = BreakingNews.objects.get(id=id)
-    news.hide = True
+    news.public = False
     news.save()
     return render(request, 'Admin_App/news_detail.html',
                   context={'news': news})

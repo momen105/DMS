@@ -32,6 +32,7 @@ class Products(models.Model):
     price = models.FloatField(default=0.00)
     public = models.BooleanField(default=False)
     private = models.BooleanField(default=False)
+    confirm = models.BooleanField(default=False)
 
 
     objects = PostManager()
