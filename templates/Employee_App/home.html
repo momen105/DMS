@@ -95,10 +95,10 @@
             {% elif product.private == True %}
             <a href="{% url 'Employee_App:view_product' id=product.id %}">View Product details</a>
             {% else %}
+             {% endif %}
         </div>
-        {% endif %}
-        {% endfor %}
         <br>
+        {% endfor %}
     </div>
 </div>
 {%endblock%}
