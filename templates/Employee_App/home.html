@@ -69,9 +69,9 @@
         <div class="card" style="height:auto">
         <h3 style="text-align: center;"><b>Products List</b></h3>
         </div>
-        <div class="card" style="height:auto">
             {% for product in product_post %}
             {% if product.public == True %}
+        <div class="card" style="height:auto">
             <div class="card-body">
                 <table class="table table-hover">
                     <thead>
@@ -96,8 +96,8 @@
             {% elif product.private == True %}
             <a href="{% url 'Employee_App:view_product' id=product.id %}">View Product details</a>
             {% else %}
-            {% endif %}
         </div>
+        {% endif %}
         {% endfor %}
     </div>
 </div>
