@@ -29,13 +29,12 @@ class SellerHome(View):
         product= Products.objects.all()
         seller_list = SellerProfile.objects.all()
         news = BreakingNews.objects.filter(public=True)
-
         return render(request, 'Seller_App/home.html',context={'title': 'Admin', 'product': product, 'seller_list': seller_list,'news':news})
+
 class EmplyoeeHome(View):
     def get(self, request):
         user = request.user
         product_post = Products.objects.filter(public=True, private=False)
-
         seller_list = SellerProfile.objects.all()
         news = BreakingNews.objects.filter(public=True)
 

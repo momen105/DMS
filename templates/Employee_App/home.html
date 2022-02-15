@@ -67,7 +67,9 @@
         <br>
         {% endfor %}
         <div class="card" style="height:auto">
-            <h3 style="text-align: center;"><b>Products List</b></h3>
+        <h3 style="text-align: center;"><b>Products List</b></h3>
+        </div>
+        <div class="card" style="height:auto">
             {% for product in product_post %}
             {% if product.public == True %}
             <div class="card-body">
@@ -95,8 +97,8 @@
             <a href="{% url 'Employee_App:view_product' id=product.id %}">View Product details</a>
             {% else %}
             {% endif %}
-            {% endfor %}
         </div>
+        {% endfor %}
     </div>
 </div>
 {%endblock%}
